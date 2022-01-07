@@ -4,8 +4,7 @@ import { CampaignCreatorsFactory } from '../../campaign-creators/campaign-creato
  * Subscriberfunction consuming campaign messages
  * campaigns signature - {...details, type: ''}
  * campaign.type is how we determine what the factory should make
- * @param req
- * @param res
+ * @param message
  */
 export default function createCampaign(message: any) {
   // validation checks

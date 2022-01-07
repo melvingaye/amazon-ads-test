@@ -14,8 +14,10 @@ export default class CampaignProcessor {
   }
 
   public async publishCampaigns(groupedCampaigns: any) {
-    for (const [type, campaigns] of groupedCampaigns) {
-      if (!campaigns.length) continue;
+    for (const entry of Object.entries(groupedCampaigns)) {
+      // destructured array gives unknown/never type
+      const [type, campaigns] = entry as any;
+      if (!campaigns?.length) continue;
 
       await Promise.allSettled(
         campaigns.map((campaign) => {

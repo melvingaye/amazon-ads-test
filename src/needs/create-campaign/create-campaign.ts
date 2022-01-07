@@ -1,7 +1,17 @@
-import { CampaignCreatorFactory } from '../../campaign-creators/campaign-creator-factory';
+import { CampaignCreatorsFactory } from '../../campaign-creators/campaign-creators-factory';
 
-export default function createCampaign(req: any, res: any) {
-  const campaignCreator = CampaignCreatorFactory.makeCampaignCreator('type');
+/**
+ * Subscriberfunction consuming campaign messages
+ * campaigns signature - {...details, type: ''}
+ * campaign.type is how we determine what the factory should make
+ * @param req
+ * @param res
+ */
+export default function createCampaign(message: any) {
+  // validation checks
+  const { type, campaign } = message.data;
 
-  campaignCreator.createSingleCampaign();
+  const campaignCreator = CampaignCreatorsFactory.makeCampaignCreator(type);
+
+  campaignCreator.createSingleCampaign(campaign);
 }

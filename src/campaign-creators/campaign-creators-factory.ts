@@ -3,7 +3,11 @@ import { SponsoredBrandCreator } from './sponsored-brand-creator';
 import { SponsoredProductCreator } from './sponsored-product-creator';
 import { SponsoredVideoCreator } from './sponsored-video-creator';
 
-export class CampaignCreatorFactory {
+/**
+ * Responsible for creating any type of CampaignCreator allows extension into other marketplaces
+ * and not just amazon.
+ */
+export class CampaignCreatorsFactory {
   static campaignCreators = { SponsoredBrandCreator, SponsoredProductCreator, SponsoredVideoCreator };
 
   public static makeCampaignCreator(type: string): CampaignCreator {

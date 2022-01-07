@@ -1,14 +1,11 @@
 import { CampaignCreator } from '../types/campaign-creator';
 
+/**
+ * All the logic for how a SponsoredProduct campaign is created should live in here,
+ * same for the other types of creators
+ */
 export class SponsoredProductCreator implements CampaignCreator {
-  cloudFnc: string;
-  queue: string;
-
-  constructor() {
-    this.cloudFnc = 'cloud function name';
-    this.queue = 'tasks queue name';
-  }
-
-  createCampaigns: () => {};
-  createSingleCampaign: () => {};
+  constructor() {}
+  createCampaigns: () => void;
+  createSingleCampaign: (campaign: any) => void;
 }

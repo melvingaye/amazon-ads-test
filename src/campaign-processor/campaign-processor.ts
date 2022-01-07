@@ -1,24 +1,30 @@
 export default class CampaignProcessor {
-  private campaignCreatorQueue = '';
-  private campaignCreatorFunction = '';
+  constructor(private createCampaignTopic = '') {}
 
-  constructor() {}
+  public groupCampaigns(campaigns: []) {
+    //reduce campaigns by types
+    return campaigns.reduce((campaign: any, campaignGroups: any) => {
+      if (!campaignGroups[campaign.type]) {
+        campaignGroups[campaign.type] = [];
+      }
 
-  public createCampaignTypeGroups(campaigns: []): { ['SponsoredBrand']: [] } {
-    //reduce campaign types
-    return { ['SponsoredBrand']: [] };
+      campaignGroups[campaign.type].push(campaign);
+      return campaignGroups;
+    }, {});
   }
 
-  public async enqueueTasks(groupedCampaigns: any) {
+  public async publishCampaigns(groupedCampaigns: any) {
     for (const [type, campaigns] of groupedCampaigns) {
+      if (!campaigns.length) continue;
+
       await Promise.allSettled(
         campaigns.map((campaign) => {
-          return creatteHttpTask({}, this.campaignCreatorQueue, this.campaignCreatorFunction, { campaign, type });
+          return publishMessage(this.createCampaignTopic, { campaign, type });
         }),
       );
     }
   }
 }
 
-//signature in the cloud lib has 4 params, is async
-function creatteHttpTask(gcpConfig: any, nameOfQueue: any, functionToTrigger: any, requestData: any) {}
+// signature in the cloud lib, this function comes from gcpPubSub
+async function publishMessage(topic: string, message: any) {}

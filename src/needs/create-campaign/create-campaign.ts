@@ -1,13 +1,7 @@
 import { CampaignCreatorFactory } from '../../campaign-creators/campaign-creator-factory';
-import CampaignProcessor from '../../campaign-processor/campaign-processor';
 
-// just an httpfunction with campaigns coming in
-export default async function campaignCreator(req: any, res: any) {
-  // validate request payload
+export default function createCampaign(req: any, res: any) {
+  const campaignCreator = CampaignCreatorFactory.makeCampaignCreator('type');
 
-  const campaignProcessor = new CampaignProcessor();
-
-  const groupedCampaigns = campaignProcessor.createCampaignTypeGroups(req.body);
-
-  await campaignProcessor.enqueueTasks(groupedCampaigns);
+  campaignCreator.createSingleCampaign();
 }

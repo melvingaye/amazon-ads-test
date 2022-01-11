@@ -3,7 +3,7 @@ export default class CampaignProcessor {
 
   public groupCampaigns(campaigns: []) {
     //reduce campaigns by types
-    return campaigns.reduce((campaign: any, campaignGroups: any) => {
+    return campaigns.reduce((campaignGroups: any, campaign: any) => {
       if (!campaignGroups[campaign.type]) {
         campaignGroups[campaign.type] = [];
       }

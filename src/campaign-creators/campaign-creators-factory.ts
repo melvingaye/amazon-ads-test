@@ -8,7 +8,11 @@ import { SponsoredVideoCreator } from './sponsored-video-creator';
  * and not just amazon.
  */
 export class CampaignCreatorsFactory {
-  static campaignCreators = { SponsoredBrandCreator, SponsoredProductCreator, SponsoredVideoCreator };
+  static campaignCreators = {
+    ['sponsoredBrand']: SponsoredBrandCreator,
+    ['sponsoredProduct']: SponsoredProductCreator,
+    ['sponsoredVideo']: SponsoredVideoCreator,
+  };
 
   public static makeCampaignCreator(type: string): CampaignCreator {
     const campaignCreator = this.campaignCreators[type];
